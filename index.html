@@ -111,6 +111,11 @@ body{
   transition:background .2s;white-space:nowrap;
 }
 .hdr-cta:hover{background:var(--pink2)}
+.hdr-cta-short{display:none}
+@media(max-width:600px){
+  .hdr-cta-long{display:none}
+  .hdr-cta-short{display:inline}
+}
 
 /* ── SHARED UTILITIES ────────────────────────────────── */
 .section{padding:5rem 1.5rem}
@@ -550,26 +555,58 @@ footer{
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
 /* ── MOBILE ───────────────────────────────────────────── */
+/* ── TABLET ───────────────────────────────────────────── */
 @media(max-width:900px){
-  .s1-inner{grid-template-columns:1fr;gap:2.5rem;text-align:center}
+  .s1-inner{grid-template-columns:1fr;gap:2rem;text-align:center}
   .s1-btns{justify-content:center}
   .s1-badge{display:none}
-  .s2-inner{grid-template-columns:repeat(2,1fr)}
+  .s1-body{max-width:100%;margin-left:auto;margin-right:auto}
+  .s2-inner{grid-template-columns:repeat(2,1fr);gap:1rem}
   .s4-inner{grid-template-columns:1fr;gap:2rem}
   .s6-inner{grid-template-columns:1fr;gap:2rem}
   .s6-inner .s6-img{order:-1}
-  .reviews{grid-template-columns:1fr}
+  .reviews{grid-template-columns:1fr;max-width:480px;margin-left:auto;margin-right:auto}
   .masonry{columns:2}
+  .section{padding:3.5rem 1.2rem}
+  .s7{padding:3.5rem 1.2rem}
+  .s11{padding:3.5rem 1.2rem}
 }
-@media(max-width:540px){
-  .s2-inner{grid-template-columns:1fr 1fr}
-  .masonry{columns:2}
-  .site-header{padding:.7rem 1.2rem}
-  .hdr-logo{font-size:1.3rem}
-  .s1{padding:6rem 1.2rem 3rem}
-}
-@media(max-width:380px){
+
+/* ── MOBILE ───────────────────────────────────────────── */
+@media(max-width:600px){
+  .site-header{padding:.7rem 1.1rem}
+  .hdr-logo{font-size:1.25rem}
+  .hdr-cta{
+    font-size:.68rem;padding:.48rem 1rem;
+    /* shorten label via attr trick — handled in HTML below */
+  }
+  .s1{padding:5.5rem 1.1rem 2.5rem}
+  .s1-h1{font-size:2.2rem}
+  .s1-h1 em{font-size:2.8rem}
+  .s1-body{font-size:.9rem}
+  .s1-btns{flex-direction:column;align-items:center;gap:.7rem}
+  .s1-btns .btn{width:100%;max-width:280px;text-align:center}
+  .s2-inner{grid-template-columns:1fr;gap:.8rem}
+  .pillar{padding:1.3rem 1.1rem}
+  .s3-hd,.s8-hd,.s9-hd,.s5-hd{margin-bottom:1.6rem}
   .masonry{columns:1}
+  .strip-item img{height:260px}
+  .s4-inner{gap:1.5rem}
+  .s6-inner{gap:1.5rem}
+  .s7-perks{gap:.5rem}
+  .s7-perk{font-size:.66rem;padding:.35rem .8rem}
+  .reviews{max-width:100%}
+  .review{padding:1.4rem 1.2rem}
+  .modal-box{padding:2rem 1.2rem;border-radius:14px}
+  .s11-inner{max-width:100%}
+  .f-links{gap:1rem}
+  .divider{margin:.6rem 0 1.2rem}
+}
+
+/* ── SMALL PHONES ─────────────────────────────────────── */
+@media(max-width:380px){
+  .s1-h1 em{font-size:2.4rem}
+  .hdr-cta{display:none}
 }
 
 </style>
@@ -592,7 +629,10 @@ footer{
 <!-- ═══ HEADER ══════════════════════════════════════════ -->
 <header class="site-header">
   <div class="hdr-logo">Scottish Kelly</div>
-  <a href="https://onlyfans.com/scottishlass1985/c1" target="_blank" class="hdr-cta">Come and join me ❤️</a>
+  <a href="https://onlyfans.com/scottishlass1985/c1" target="_blank" class="hdr-cta">
+    <span class="hdr-cta-long">Come and join me ❤️</span>
+    <span class="hdr-cta-short">Join me ❤️</span>
+  </a>
 </header>
 
 <!-- ═══ S1: HERO ════════════════════════════════════════ -->
