@@ -296,23 +296,22 @@ body{
 .s5{padding:4rem 0;background:var(--cream)}
 .s5-hd{text-align:center;padding:0 1.5rem;margin-bottom:2rem}
 .strip{
-  display:flex;gap:10px;
-  overflow-x:auto;padding:0 1.5rem 1rem;
-  scrollbar-width:none;-ms-overflow-style:none;
-  align-items:flex-start;
+  display:flex;gap:0;
+  width:100%;
+  align-items:stretch;
 }
-.strip::-webkit-scrollbar{display:none}
 .strip-item{
-  flex:0 0 auto;
-  border-radius:14px;overflow:hidden;
-  box-shadow:0 2px 14px rgba(212,114,138,.1);
+  flex:1 1 0;
+  overflow:hidden;
   transition:transform .3s;
 }
 .strip-item:hover{transform:scale(1.02)}
 .strip-item img{
-  height:320px;
-  width:auto;
+  width:100%;
+  height:100%;
+  object-fit:cover;
   display:block;
+  min-height:360px;
 }
 
 /* ── S6: BIO ─────────────────────────────────────────── */
