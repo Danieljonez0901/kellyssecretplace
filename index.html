@@ -86,6 +86,82 @@ body{
   font-size:.62rem;letter-spacing:.06em;
 }
 
+/* ── LIVE FUNNEL BANNER ──────────────────────────────── */
+#funnel-banner{width:100%;position:relative;z-index:150}
+#funnel-banner.funnel-hidden{display:none}
+.funnel-state{
+  display:none;
+  width:100%;padding:1.1rem 2rem;
+  align-items:center;justify-content:center;
+  gap:2rem;flex-wrap:wrap;text-align:center;
+}
+.funnel-state.active{display:flex}
+
+/* LIVE */
+.funnel-live{background:#0c0c18}
+@keyframes pulse-dot{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.5;transform:scale(1.5)}
+}
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 rgba(255,59,48,.6)}
+  70%{box-shadow:0 0 0 10px rgba(255,59,48,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,59,48,0)}
+}
+.funnel-dot{
+  width:13px;height:13px;
+  background:#ff3b30;border-radius:50%;flex-shrink:0;
+  animation:pulse-dot 1.2s ease-in-out infinite,
+            pulse-ring 1.5s ease-out infinite;
+}
+.funnel-live-tag{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:#ff6b6b;margin-bottom:.25rem;font-weight:700;
+}
+.funnel-live-h{
+  font-family:var(--font-serif);font-size:1.3rem;
+  color:#fff;margin:0 0 .15rem;font-style:italic;
+}
+.funnel-live-sub{font-size:.8rem;color:rgba(255,255,255,.45)}
+.funnel-live-btn{
+  flex-shrink:0;
+  background:#ff3b30;color:#fff;
+  padding:.7rem 1.7rem;border-radius:50px;
+  font-weight:700;font-size:.88rem;letter-spacing:.05em;
+  white-space:nowrap;transition:background .2s,transform .15s;
+  box-shadow:0 0 24px rgba(255,59,48,.35);
+}
+.funnel-live-btn:hover{background:#d9231a;transform:scale(1.04)}
+
+/* TRIAL */
+.funnel-trial{
+  background:linear-gradient(120deg,#d4728a 0%,#b85a72 50%,#c49a8a 100%);
+}
+.funnel-trial-tag{
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(255,255,255,.7);margin-bottom:.25rem;font-weight:700;
+}
+.funnel-trial-h{
+  font-family:var(--font-serif);font-size:1.3rem;
+  color:#fff;margin:0 0 .15rem;font-style:italic;
+}
+.funnel-trial-sub{font-size:.8rem;color:rgba(255,255,255,.65)}
+.funnel-trial-btn{
+  flex-shrink:0;
+  background:#fff;color:var(--pink2);
+  padding:.7rem 1.7rem;border-radius:50px;
+  font-weight:700;font-size:.88rem;letter-spacing:.05em;
+  white-space:nowrap;transition:background .2s,transform .15s,box-shadow .15s;
+}
+.funnel-trial-btn:hover{
+  background:var(--cream);transform:scale(1.04);
+  box-shadow:0 4px 24px rgba(0,0,0,.18);
+}
+@media(max-width:640px){
+  .funnel-state{flex-direction:column;gap:1rem;padding:1.4rem 1.2rem}
+  .funnel-live-h,.funnel-trial-h{font-size:1.1rem}
+}
+
 /* ── STICKY HEADER ───────────────────────────────────── */
 .site-header{
   position:fixed;top:0;left:0;right:0;z-index:200;
@@ -621,6 +697,36 @@ footer{
   <p class="ag-note">18+ · Adult content · scottishkelly.uk</p>
 </div>
 
+<!-- ═══ LIVE FUNNEL BANNER ══════════════════════════════ -->
+<div id="funnel-banner" class="funnel-hidden">
+
+  <!-- STATE: LIVE on Chaturbate -->
+  <div id="funnel-live" class="funnel-state funnel-live">
+    <div class="funnel-dot"></div>
+    <div>
+      <p class="funnel-live-tag">Live right now</p>
+      <h2 class="funnel-live-h">I'm on Chaturbate — come say hello</h2>
+      <p class="funnel-live-sub">Join me live, I'm on right now 🔴</p>
+    </div>
+    <a href="https://chaturbate.com/p/scottishlass1985/" target="_blank" rel="noopener" class="funnel-live-btn">
+      Join me live →
+    </a>
+  </div>
+
+  <!-- STATE: OFFLINE — free trial offer -->
+  <div id="funnel-trial" class="funnel-state funnel-trial">
+    <div>
+      <p class="funnel-trial-tag">Not free to join right now?</p>
+      <h2 class="funnel-trial-h">There's something for you down below</h2>
+      <p class="funnel-trial-sub">Get a full month on my OnlyFans — completely free, no catch</p>
+    </div>
+    <a href="https://onlyfans.com/scottishlass1985/trial/lmmr9lg1g3c3itir058wu5wqrufg4ymr" target="_blank" rel="noopener" class="funnel-trial-btn">
+      Claim 1 month free →
+    </a>
+  </div>
+
+</div>
+
 <!-- ═══ HEADER ══════════════════════════════════════════ -->
 <header class="site-header">
   <div class="hdr-logo">Scottish Kelly</div>
@@ -919,6 +1025,48 @@ function enterSite(){
 }
 if(sessionStorage.getItem('age-ok')==='1')
   document.getElementById('age-gate').style.display='none';
+
+// ── LIVE FUNNEL ──────────────────────────────────────────
+(function(){
+  // Set VPS URL once the server is live, e.g. 'https://status.scottishkelly.uk/live'
+  // Leave empty to run on schedule-only mode
+  const VPS_URL = '';
+
+  // Stream schedule: Wed–Sun 9pm–1am UK time
+  function isOnSchedule(){
+    const now  = new Date();
+    const uk   = new Date(now.toLocaleString('en-US',{timeZone:'Europe/London'}));
+    const d    = uk.getDay();   // 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat
+    const h    = uk.getHours();
+    const eve  = [3,4,5,6,0].includes(d) && h >= 21;  // Wed-Sun from 9pm
+    const late = [4,5,6,0,1].includes(d) && h < 1;    // Thu-Mon before 1am carry-over
+    return eve || late;
+  }
+
+  function showFunnel(live){
+    const banner = document.getElementById('funnel-banner');
+    const liveEl = document.getElementById('funnel-live');
+    const trialEl= document.getElementById('funnel-trial');
+    banner.classList.remove('funnel-hidden');
+    liveEl.classList.toggle('active', live);
+    trialEl.classList.toggle('active', !live);
+  }
+
+  function update(){
+    if(VPS_URL){
+      fetch(VPS_URL,{cache:'no-store'})
+        .then(r=>r.json())
+        .then(d=>showFunnel(!!d.live))
+        .catch(()=>showFunnel(isOnSchedule()));
+    } else {
+      showFunnel(isOnSchedule());
+    }
+  }
+
+  update();
+  // Re-check every 5 minutes so the banner flips without a page reload
+  setInterval(update, 5 * 60 * 1000);
+})();
 </script>
 </body>
 </html>

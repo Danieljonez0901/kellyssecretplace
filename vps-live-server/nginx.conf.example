@@ -1,0 +1,25 @@
+# Add this server block to your nginx config on the VPS
+# Then add an A record in Cloudflare DNS: status.scottishkelly.uk → your VPS IP
+# Run: certbot --nginx -d status.scottishkelly.uk
+
+server {
+    listen 80;
+    server_name status.scottishkelly.uk;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name status.scottishkelly.uk;
+
+    ssl_certificate     /etc/letsencrypt/live/status.scottishkelly.uk/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/status.scottishkelly.uk/privkey.pem;
+
+    add_header Access-Control-Allow-Origin "https://scottishkelly.uk" always;
+    add_header Access-Control-Allow-Methods "GET, POST, OPTIONS" always;
+
+    location / {
+        proxy_pass http://127.0.0.1:5055;
+        proxy_set_header Host $host;
+    }
+}

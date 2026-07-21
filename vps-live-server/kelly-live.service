@@ -1,0 +1,13 @@
+[Unit]
+Description=Kelly Live Status Server
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/root/kelly-live-server
+ExecStart=/usr/bin/python3 /root/kelly-live-server/server.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
