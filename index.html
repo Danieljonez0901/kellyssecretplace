@@ -421,26 +421,29 @@ body{
   max-width:1100px;margin:0 auto;
   display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;
 }
-.review{
-  background:var(--white);border-radius:16px;
-  padding:2rem 1.6rem;
-  box-shadow:var(--card-shadow);
-  position:relative;
+.dm-card{
+  background:#1c1c1e;
+  border-radius:20px;
+  padding:1.4rem 1.4rem 1.1rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.22);
+  display:flex;flex-direction:column;gap:.9rem;
 }
-.review::before{
-  content:'❝';
-  position:absolute;top:1.2rem;right:1.4rem;
-  font-size:2rem;color:var(--pink-soft);
-  font-family:Georgia,serif;line-height:1;
+.dm-bubble{
+  background:#2c2c2e;
+  border-radius:18px 18px 18px 4px;
+  padding:1rem 1.1rem;
 }
-.review-text{
-  color:var(--plum2);font-size:.88rem;line-height:1.9;
-  margin-bottom:1.2rem;font-style:italic;
+.dm-text{
+  color:#f2f2f7;
+  font-size:.92rem;line-height:1.65;
+  margin:0 0 .45rem;
 }
-.review-name{
-  font-size:.72rem;font-weight:700;
-  color:var(--pink);letter-spacing:.06em;
+.dm-time{
+  color:#8e8e93;
+  font-size:.72rem;
 }
+@media(max-width:900px){.reviews{grid-template-columns:1fr}}
+@media(min-width:601px) and (max-width:900px){.reviews{grid-template-columns:1fr 1fr}}
 
 /* ── S9: MASONRY GALLERY 2 ───────────────────────────── */
 .s9{padding:5rem 1.5rem;background:var(--blush)}
@@ -828,17 +831,23 @@ Come and have a proper nosey. I think you'll like it here. 😊</p>
     <h2 class="h2">What people are saying</h2>
   </div>
   <div class="reviews">
-    <div class="review">
-      <p class="review-text">"She's the real deal. No bots, no copy-paste messages. Kelly actually talks to you like you're a human being — which, refreshingly, she treats you as."</p>
-      <div class="review-name">— Chris, subscriber</div>
+    <div class="dm-card">
+      <div class="dm-bubble">
+        <p class="dm-text">You're the real deal. No bots, no copy-paste messages. You actually talk to me like I'm a human being, which is honestly so refreshing.</p>
+        <span class="dm-time">1:48 pm</span>
+      </div>
     </div>
-    <div class="review">
-      <p class="review-text">"I've followed plenty of creators and Kelly stands out. She's funny, she's genuine, and she actually replies herself. Didn't expect that at all."</p>
-      <div class="review-name">— James</div>
+    <div class="dm-card">
+      <div class="dm-bubble">
+        <p class="dm-text">I've followed plenty of creators, but you genuinely stand out. You're funny, you're authentic, and the fact you actually reply yourself caught me completely off guard.</p>
+        <span class="dm-time">2:45 pm</span>
+      </div>
     </div>
-    <div class="review">
-      <p class="review-text">"Honestly didn't expect it to feel this personal. She makes you feel like an actual person, not just a number. And the content is brilliant."</p>
-      <div class="review-name">— Mark, subscriber</div>
+    <div class="dm-card">
+      <div class="dm-bubble">
+        <p class="dm-text">I honestly didn't expect it to feel this personal. You make me feel like an actual person instead of just another subscriber. And your content is incredible.</p>
+        <span class="dm-time">1:52 am</span>
+      </div>
     </div>
   </div>
 </section>
