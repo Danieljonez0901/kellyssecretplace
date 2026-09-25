@@ -1,0 +1,11 @@
+# The link tracker runs on go.scottishkelly.uk. The apex is a static Cloudflare
+# Pages site whose catch-all serves the homepage for ANY unknown path — so a
+# tracking URL that lost its "go." prefix silently returned the homepage with
+# no redirect and no click recorded. Danny hit exactly this on
+# scottishkelly.uk/of/_pastelcloud (2026-09-25).
+/of/*            https://go.scottishkelly.uk/of/:splat   302
+/_pastelcloud    https://go.scottishkelly.uk/_pastelcloud   302
+/sparklebush     https://go.scottishkelly.uk/sparklebush    302
+/neonmiss        https://go.scottishkelly.uk/neonmiss       302
+/mistyvale       https://go.scottishkelly.uk/mistyvale      302
+/plushorbit      https://go.scottishkelly.uk/plushorbit     302
